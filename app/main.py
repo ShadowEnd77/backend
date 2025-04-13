@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.config import get_settings
 
-from app.router import geo, session
+from app.router import geo, session, survey2
 from app.database import Base, engine
 
 settings = get_settings()
@@ -10,6 +10,7 @@ Base.metadata.create_all(bind=engine)
 
 app.include_router(geo.router, prefix="/geo", tags=["Geo"])
 app.include_router(session.router, prefix="/session", tags=["Session"])
+app.include_router(survey2.router)
 
 @app.get("/")
 async def root():
